@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery Website</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="loading-page">
+      <div class="counter">
+        <h5 style="color: aliceblue">
+          ഇത് ഇത്തിരി സൈസ് കൂടിയ ഇനം ആണ് സാറേ.... കുറച്ച് time എടുക്കും.....
+        </h5>
+        <p>loading</p>
+        <h1>
+          0%
+          <!--h1.abs loading
+h1.abs.color loading-->
+        </h1>
+        <hr />
+      </div>
+    </div>
+    <!-- <div class="gallery">
+      <span style="--i: 1">
+        <img
+          src="https://images4.alphacoders.com/678/thumb-1920-678317.jpg"
+          alt=""
+        />
+      </span>
+      <span style="--i: 2">
+        <img src="https://images5.alphacoders.com/653/653698.jpg" alt="" />
+      </span>
+      <span style="--i: 3">
+        <img
+          src="https://images6.alphacoders.com/803/thumb-1920-803643.png"
+          alt=""
+        />
+      </span>
+      <span style="--i: 4">
+        <img
+          src="https://images.alphacoders.com/785/thumb-1920-785833.png"
+          alt=""
+        />
+      </span>
+      <span style="--i: 5">
+        <img
+          src="https://images6.alphacoders.com/749/thumb-1920-749966.png"
+          alt=""
+        />
+      </span>
+      <span style="--i: 6">
+        <img
+          src="https://images4.alphacoders.com/761/thumb-1920-761076.png"
+          alt=""
+        />
+      </span>
+      <span style="--i: 7">
+        <img
+          src="https://images.alphacoders.com/682/thumb-1920-682570.png"
+          alt=""
+        />
+      </span>
+      <span style="--i: 8">
+        <img
+          src="https://images4.alphacoders.com/866/thumb-1920-866812.png"
+          alt=""
+        />
+      </span>
+    </div> -->
+    <div class="gallery-container">
+      <div class="gallery" id="imageGallery"></div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+      $(document).ready(function () {
+        // Hide other divs initially
+        $(".gallery-container .gallery").hide();
+
+        var counter = 0;
+        var c = 0;
+        var i = setInterval(function () {
+          $(".loading-page .counter h1").html(c + "%");
+          $(".loading-page .counter hr").css("width", c + "%");
+
+          counter++;
+          c++;
+
+          // Check if the counter has reached 100%
+          if (counter == 101) {
+            clearInterval(i);
+
+            // Hide the loading page after a delay of 2 seconds (2000 milliseconds)
+            setTimeout(function () {
+              $(".loading-page").fadeOut(); // Fades out the loading page
+              // Show other divs
+              $(".gallery-container .gallery").fadeIn();
+            }, 1000);
+          }
+        }, 50);
+      });
+
+      const galleryContainer = document.getElementById("imageGallery");
+      const folderPath = "images/"; // Replace 'images/' with the actual relative path to your folder
+      const imageExtensions = ["jpg", "jpeg", "png", "gif"];
+
+      function generateGallery() {
+        const filePromises = [];
+
+        // Loop through each image index and construct file paths
+        for (let i = 1; i <= 30; i++) {
+          // Assuming you have 10 images
+          const filePath = folderPath + "image" + i + ".jpg"; // Adjust file naming convention as needed
+          filePromises.push(fetch(filePath));
+        }
+
+        // Resolve all file promises
+        Promise.all(filePromises)
+          .then((responses) =>
+            Promise.all(responses.map((response) => response.blob()))
+          )
+          .then((blobs) => {
+            blobs.forEach((blob, index) => {
+              const imageURL = URL.createObjectURL(blob);
+              const img = document.createElement("img");
+              img.src = imageURL;
+
+              const span = document.createElement("span");
+              span.style.setProperty("--i", index + 1);
+              span.appendChild(img);
+              galleryContainer.appendChild(span);
+            });
+          })
+          .catch((error) => {
+            console.error("Error fetching images:", error);
+          });
+      }
+
+      generateGallery();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,120 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,900italic,900,700italic,700,500italic,500,400italic,300italic,300,100italic,100);
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background-color: #020202;
+  font-family: Roboto;
+  animation: gradient 15s ease infinite !important;
+}
+
+h1,
+p,
+h2,
+h3,
+h4,
+ul,
+li,
+div {
+  margin: 0;
+  padding: 0;
+}
+
+/* body {
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  font-family: Roboto;
+} */
+
+.loading-page {
+  background: #0d0d0d;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loading-page .counter {
+  text-align: center;
+}
+.loading-page .counter p {
+  font-size: 40px;
+  font-weight: 100;
+  color: #f60d54;
+}
+.loading-page .counter h1 {
+  color: white;
+  font-size: 60px;
+  margin-top: -10px;
+}
+.loading-page .counter hr {
+  background: #f60d54;
+  border: none;
+  height: 1px;
+}
+.loading-page .counter {
+  position: relative;
+  width: 200px;
+}
+.loading-page .counter h1.abs {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.loading-page .counter .color {
+  width: 0px;
+  overflow: hidden;
+  color: #f60d54;
+}
+.gallery-container {
+  width: 100%; /* Full width */
+  height: 100vh; /* Full height of the viewport */
+  overflow-y: auto;
+  scroll-behavior: smooth; /* Smooth scrolling */
+  border: 1px solid #ccc; /* Optional border */
+  border-radius: 10px; /* Optional border radius */
+  padding: 10px; /* Optional padding */
+}
+
+.gallery img {
+  width: 100%;
+  display: block;
+  border: 2px solid #f0f0f0; /* Beautiful border */
+  border-radius: 10px; /* Optional border radius for images */
+  margin-bottom: 10px; /* Spacing between images */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow effect */
+  transition: transform 0.2s ease; /* Smooth transition on hover */
+}
+
+.gallery img:hover {
+  transform: scale(1.05); /* Scale up on hover */
+}
+
+/* Media query for mobile devices */
+@media screen and (max-width: 767px) {
+  .gallery-container {
+    height: 100vh; /* Full height of the viewport */
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
